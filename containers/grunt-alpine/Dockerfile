@@ -58,4 +58,4 @@ COPY ./install.sh /src
 RUN chmod +x /src/install.sh
 
 WORKDIR /var/www/theme
-#ENTRYPOINT ["/src/install.sh"]
+ENTRYPOINT ["/src/install.sh"]

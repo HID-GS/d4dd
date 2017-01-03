@@ -5,8 +5,8 @@ services:
   applications:
     image: tianon/true
     volumes:
-      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
-      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
+#      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
+#      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
       - ${PROJECTS_PATH}/${HID_D7}:/var/www/hidglobal
   mariadb:
     build:
@@ -18,8 +18,8 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
+      MYSQL_DATABASE: hidglobal
+      MYSQL_USER: hidglobal
       MYSQL_PASSWORD: secret
   nginx:
     build:
