@@ -19,7 +19,7 @@ db-download:
 db-import:
 ## Imports new db into container 
 	@echo "Deploying new database"
-	@pv data/backups/HIDGlobal.mysql | mysql -h 127.0.0.1 -u root -psecret hidglobal 2> /dev/null
+	@if [ `which pv` ]; then pv data/backups/HIDGlobal.mysql | mysql -h 0.0.0.0 -u root -psecret hidglobal 2> /dev/null; else mysql -h 0.0.0.0 -u root -psecret hidglobal < data/backups/HIDGlobal.mysql 2> /dev/null; fi
 db-configure:
 ## Configures new db into container 
 	docker-compose exec php-fpm drush updb -y
