@@ -18,7 +18,8 @@ db-download:
 	sh getdb.sh
 db-import:
 ## Imports new db into container 
-	mysql -h 0.0.0.0 -u root -psecret hidglobal < data/backups/HIDGlobal.mysql
+	@echo "Deploying new database"
+	@pv data/backups/HIDGlobal.mysql | mysql -h 127.0.0.1 -u root -psecret hidglobal 2> /dev/null
 db-configure:
 ## Configures new db into container 
 	docker-compose exec php-fpm drush updb -y
