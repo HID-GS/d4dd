@@ -1,13 +1,14 @@
 docker-rebuild:
 	docker-compose stop
 	docker-compose build
+	docker-compose up -d
 docker-restart:
 	docker-compose stop
 	docker-compose up -d
 db-download:
 	sh getdb.sh
 db-import:
-	mysql -h 0.0.0.0 -u root -psecret homestead < data/backups/HIDGlobal.mysql
+	mysql -h 0.0.0.0 -u root -psecret hidglobal < data/backups/HIDGlobal.mysql
 db-configure:
 	docker-compose exec php-fpm drush updb -y
 	docker-compose exec php-fpm drush en -y language_domains stage_file_proxy maillog views_ui update
