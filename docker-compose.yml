@@ -1,0 +1,73 @@
+version: '2'
+services:
+
+### Applications Code Container #############################
+  applications:
+    image: tianon/true
+    volumes:
+      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
+      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
+      - ${PROJECTS_PATH}/${HID_D7}:/var/www/hidglobal
+  mariadb:
+    build:
+      context: ./containers/mariadb
+    volumes:
+        - mysql:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+  nginx:
+    build:
+      context: ./containers/nginx
+      args:
+          - PHP_UPSTREAM=php-fpm
+    ports:
+        - "80:80"
+        - "443:443"
+    volumes:
+        - ./data/logs/nginx/:/var/log/nginx
+    volumes_from:
+        - php-fpm
+    links:
+        - php-fpm
+  php-fpm:
+    build:
+      context: ./containers/php7-fpm
+    depends_on:
+      - mariadb
+    volumes:
+      - ./data/logs/php/:/var/log
+    links:
+      - mariadb
+    ports:
+      - "9000"
+    restart: always
+    volumes_from:
+      - applications
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - 8181:80
+    environment:
+      mariadb_USERNAME: root
+      mariadb_ROOT_PASSWORD: secret
+  solr3:
+    build: ./containers/solr-3.x
+    ports:
+      - 8983:8983
+    restart: always
+  grunt:
+    build: ./containers/grunt
+    volumes_from:
+      - applications
+    volumes:
+      - ${PROJECTS_PATH}/${HID_D7}/hid/sites/all/themes/hidglobal:/var/www/theme
+volumes:
+  mysql:
