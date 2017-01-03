@@ -31,3 +31,20 @@ db-configure:
 docker-drush:
 ## Runs drush in php container
 	docker-compose exec php-fpm drush $(filter-out $@,$(MAKECMDGOALS))
+start:
+## Start containers
+	@echo ""
+	@echo "Starting containers"
+	@docker-compose up -d
+	@echo "Done."
+	@echo ""
+stop:
+## Stop containers
+	@echo ""
+	@echo "Stopping containers"
+	@docker-compose stop
+	@echo "Done."
+	@echo ""
+status:
+## Statuses for existing container farm
+	@./docker-status.bash
