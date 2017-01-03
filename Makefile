@@ -17,8 +17,8 @@ db-download:
 ## Downloads new database file from dev2
 	sh getdb.sh
 db-import:
-	mysql -h 0.0.0.0 -u root -psecret hidglobal < data/backups/HIDGlobal.mysql
 ## Imports new db into container 
+	mysql -h 0.0.0.0 -u root -psecret hidglobal < data/backups/HIDGlobal.mysql
 db-configure:
 ## Configures new db into container 
 	docker-compose exec php-fpm drush updb -y
