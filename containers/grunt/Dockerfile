@@ -8,9 +8,12 @@ RUN apt-get -y update && \
 RUN gem install compass --no-ri --no-rdoc && \
     gem install bundler --no-ri --no-rdoc
 
-RUN npm install -g n bower grunt-cli phantomjs-prebuilt
+RUN npm install -g n bower grunt-cli
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN n 0.10.48
+
+RUN npm install -g phantomjs-prebuilt
+
 RUN mkdir /src
 RUN mkdir -p /var/www/theme
 COPY ./install.sh /src
