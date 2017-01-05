@@ -69,5 +69,11 @@ services:
       - applications
     volumes:
       - ${PROJECTS_PATH}/${HID_D7}/hid/sites/all/themes/hidglobal:/var/www/theme
+  redis:
+    image: redis:alpine
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
 volumes:
   mysql:
