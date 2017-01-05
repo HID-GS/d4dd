@@ -17,6 +17,7 @@ function check_container() {
 check_container "phpmyadmin" "phpmyadmin/phpmyadmin"
 check_container "nginx     " "hiddockerd7_nginx"
 check_container "php       " "hiddockerd7_php-fpm"
+check_container "redis     " "redis:alpine"
 check_container "grunt     " "hiddockerd7_grunt"
 check_container "mariadb   " "hiddockerd7_mariadb"
 check_container "solr3     " "hiddockerd7_solr3"
