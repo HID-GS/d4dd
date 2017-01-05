@@ -20,6 +20,7 @@
 1. ```docker-sync-stack start```
 
 Alternatively:
+
 1. ```docker-sync start```
 2. In a new shell run after you started docker-sync 
 ```docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d```
