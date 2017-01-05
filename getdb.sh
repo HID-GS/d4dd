@@ -10,7 +10,7 @@ fi
 
 REMOTEFILE='/var/local/backups/hidglobal.db.sql.gz'
 REMOTESERVER='dev2.hid.gl'
-WORKFOLDER="$HOME/workspace/docker-php-stack/data/backups"
+WORKFOLDER="./data/backups"
 LOCALFILE="$WORKFOLDER/HIDGlobal.mysql"
 
 touch $SEMAPHORE
