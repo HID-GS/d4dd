@@ -1,0 +1,22 @@
+version: '2'
+services:
+
+### Applications Code Container #############################
+  applications:
+    image: tianon/true
+    volumes:
+#      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
+#      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
+      - codebase-rsync-sync:/var/www/hidglobal:rw
+  grunt:
+    build: ./containers/grunt
+    volumes_from:
+      - applications
+    volumes:
+      - themebase-rsync-sync:/var/www/theme:rw
+volumes:
+  mysql:
+  codebase-rsync-sync:
+    external: true
+  themebase-rsync-sync:
+    external: true
