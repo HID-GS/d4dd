@@ -2,7 +2,7 @@ FROM php:7.0-fpm-alpine
 MAINTAINER Dmitrii Larionov <dlarionov@hidglobal.com>
 
 RUN apk update \
-		&& apk add --no-cache libjpeg-turbo-dev libpng-dev imagemagick-dev libtool autoconf gcc g++ make
+		&& apk add --no-cache libjpeg-turbo-dev libpng-dev imagemagick-dev libtool autoconf gcc g++ make mariadb-client
 
 RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 		&& docker-php-ext-install gd mbstring opcache pdo pdo_mysql zip
