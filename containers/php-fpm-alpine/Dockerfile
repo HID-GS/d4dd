@@ -10,6 +10,8 @@ RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 
+# ensure www-data user exists
+
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
@@ -32,6 +34,12 @@ RUN { \
 # Drush:
 # Get a global installation of Drush on the web / drupal container
 RUN php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush && chmod +x drush && mv drush /usr/local/bin
+
+RUN if [ $(grep www-data /etc/passwd | wc -l) -eq 0 ]; then \
+        set -x; \
+        addgroup -g 82 -S www-data; \
+        adduser -u 82 -D -S -G www-data www-data; \
+    fi;
 
 # Delete packages
 RUN apk del libtool autoconf gcc g++ make && \

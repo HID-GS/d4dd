@@ -75,41 +75,41 @@ services:
       - ./data/redis:/data
     ports:
       - "6379:6379"
-  sonarqube:
-    image: sonarqube:alpine
-    ports:
-      - "9000:9000"
-      - "9092:9092"
-    networks:
-      - sonarnet
-    environment:
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=sonar
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
-    volumes:
-      - sonarqube_conf:/opt/sonarqube/conf
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
-  postgres:
-    image: postgres:alpine
-    networks:
-      - sonarnet
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-    volumes:
-      - postgresql:/var/lib/postgresql
-        # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
-      - postgresql_data:/var/lib/postgresql/data
+#  sonarqube:
+#    image: sonarqube:alpine
+#    ports:
+#      - "9000:9000"
+#      - "9092:9092"
+#    networks:
+#      - sonarnet
+#    environment:
+#      - SONARQUBE_JDBC_USERNAME=sonar
+#      - SONARQUBE_JDBC_PASSWORD=sonar
+#      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
+#    volumes:
+#      - sonarqube_conf:/opt/sonarqube/conf
+#      - sonarqube_data:/opt/sonarqube/data
+#      - sonarqube_extensions:/opt/sonarqube/extensions
+#      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+#  postgres:
+#    image: postgres:alpine
+#    networks:
+#      - sonarnet
+#    environment:
+#      - POSTGRES_USER=sonar
+#      - POSTGRES_PASSWORD=sonar
+#    volumes:
+#      - postgresql:/var/lib/postgresql
+#        # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+#      - postgresql_data:/var/lib/postgresql/data
 volumes:
   mysql:
-  postgresql:
-  postgresql_data:
-  sonarqube_conf:
-  sonarqube_data:
-  sonarqube_extensions:
-  sonarqube_bundled-plugins:
-networks:
-  sonarnet:
-    driver: bridge
+#  postgresql:
+#  postgresql_data:
+#  sonarqube_conf:
+#  sonarqube_data:
+#  sonarqube_extensions:
+#  sonarqube_bundled-plugins:
+#networks:
+#  sonarnet:
+#    driver: bridge

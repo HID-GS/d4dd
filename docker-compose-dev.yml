@@ -7,7 +7,7 @@ services:
     volumes:
 #      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
 #      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
-      - codebase-rsync-sync:/var/www/hidglobal:rw
+      - codebase-rsync-sync:/var/www/hidglobal/hid:rw
   grunt:
     build: ./containers/grunt
     volumes_from:
