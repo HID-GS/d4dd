@@ -64,7 +64,7 @@ services:
       - 8983:8983
     restart: always
   grunt:
-    build: ./containers/grunt
+    build: ./containers/grunt-alpine
     volumes_from:
       - applications
     volumes:

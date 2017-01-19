@@ -2,9 +2,12 @@ FROM ruby:2.3-alpine
 MAINTAINER Dmitrii Larionov <dlarionov@hidglobal.com>
 
 ENV VERSION=v0.10.48 CFLAGS="-D__USE_MISC" NPM_VERSION=2
+# For base builds
+# ENV CONFIG_FLAGS="--without-npm" RM_DIRS=/usr/include
+ENV DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
 
 #Node
-RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg build-base && \
+RUN apk add --no-cache curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg build-base imagemagick-dev git && \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     9554F04D7259F04124DE6B476D5A82AC7E37093B \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
@@ -41,9 +44,9 @@ RUN gem install compass --no-ri --no-rdoc && \
 # Install node packages
 RUN npm install -g bower grunt-cli
 
-# Delete packages
-RUN apk del curl make gcc g++ python linux-headers paxctl gnupg build-base ${DEL_PKGS} && \
-  rm -rf /etc/ssl /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
+#Delete packages
+RUN apk del curl python linux-headers paxctl gnupg ${DEL_PKGS} #&& \
+  rm -rf /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
     /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
