@@ -28,11 +28,11 @@ syncs:
     # enable terminal_notifier. On every sync sends a Terminal Notification regarding files being synced. ( Mac Only ).
     # good thing in case you are developing and want to know exactly when your changes took effect.
     # be aware in case of unison this only gives you a notification on the initial sync, not the syncs after changes.
-    notify_terminal: true
+    notify_terminal: false
 
     # which folder to watch / sync from - you can use tilde (~), it will get expanded. Be aware that the trailing slash makes a difference
     # if you add them, only the inner parts of the folder gets synced, otherwise the parent folder will be synced as top-level folder
-    src: '~/Sites/hidglobal/hid'
+    src: '~/Sites/HID-Global/hid'
 
     # which destination on the sync-container. Since you will use volumes_from to mount this, this should match your code-deployment location in the real container
     dest: '/var/www/hidglobal/hid'
@@ -57,9 +57,9 @@ syncs:
     # this does not user groupmap but rather configures the server to map
     sync_groupid: '82'
   themebase-rsync-sync:
-    notify_terminal: true
+    notify_terminal: false
     #sync_args: '--delete' # delete files on the container if they are deleted on the host
-    src: '~/Sites/hidglobal/hid/sites/all/themes/hidglobal'
+    src: '~/Sites/HID-Global/hid/sites/all/themes/hidglobal'
     dest: '/var/www/theme'
     sync_host_ip: '127.0.0.1'
     sync_host_port: 10872
