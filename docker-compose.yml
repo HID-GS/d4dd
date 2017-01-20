@@ -67,23 +67,13 @@ services:
     build: ./containers/grunt-alpine
     volumes_from:
       - applications
-    volumes:
-      - ${PROJECTS_PATH}/${HID_D7}/hid/sites/all/themes/hidglobal:/var/www/theme
+    depends_on:
+      - applications
   redis:
     image: redis:alpine
     volumes:
       - ./data/redis:/data
     ports:
       - "6379:6379"
-
 volumes:
   mysql:
-#  postgresql:
-#  postgresql_data:
-#  sonarqube_conf:
-#  sonarqube_data:
-#  sonarqube_extensions:
-#  sonarqube_bundled-plugins:
-#networks:
-#  sonarnet:
-#    driver: bridge
