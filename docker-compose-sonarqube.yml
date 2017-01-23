@@ -31,9 +31,13 @@ services:
     image: jenkins:alpine
     volumes:
       - jenkins_home:/var/jenkins_home
+    networks:
+      - sonarnet
     ports:
       - "8080:8080"
       - "50000:50000"
+    links:
+      - sonarqube
 volumes:
   postgresql:
   postgresql_data:
