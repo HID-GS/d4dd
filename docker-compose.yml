@@ -38,6 +38,8 @@ services:
   php-fpm:
     build:
       context: ./containers/php-fpm-alpine
+      args:
+        - INSTALL_XDEBUG=true
     depends_on:
       - mariadb
     volumes:

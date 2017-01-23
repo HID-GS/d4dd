@@ -10,6 +10,24 @@ RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 
+#####################################
+# xDebug:
+#####################################
+
+ARG INSTALL_XDEBUG=false
+RUN if [ ${INSTALL_XDEBUG} = true ]; then \
+    # Install the xdebug extension
+    pecl install xdebug && \
+    docker-php-ext-enable xdebug \
+;fi
+
+RUN { \
+		echo 'xdebug.remote_enable=on'; \
+    echo 'xdebug.remote_autostart=off'; \
+    echo 'xdebug.remote_port=9001'; \
+    echo 'xdebug.remote_host=172.19.0.1'; \
+  } > /usr/local/etc/php/conf.d/xdebug.ini
+
 # ensure www-data user exists
 
 # set recommended PHP.ini settings
