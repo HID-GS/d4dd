@@ -15,20 +15,16 @@ RUN pecl install imagick \
 #####################################
 
 ARG INSTALL_XDEBUG=false
+ARG HOST_IP
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     # Install the xdebug extension
     pecl install xdebug && \
     docker-php-ext-enable xdebug \
 ;fi
 
-RUN { \
-		echo 'xdebug.remote_enable=on'; \
-    echo 'xdebug.remote_autostart=off'; \
-    echo 'xdebug.remote_port=9001'; \
-    echo 'xdebug.remote_host=172.19.0.1'; \
-  } > /usr/local/etc/php/conf.d/xdebug.ini
-
-# ensure www-data user exists
+# ADD for REMOTE debugging
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN echo "xdebug.remote_host=$HOST_IP" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -53,6 +49,7 @@ RUN { \
 # Get a global installation of Drush on the web / drupal container
 RUN php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush && chmod +x drush && mv drush /usr/local/bin
 
+# ensure www-data user exists
 RUN if [ $(grep www-data /etc/passwd | wc -l) -eq 0 ]; then \
         set -x; \
         addgroup -g 82 -S www-data; \
