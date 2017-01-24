@@ -45,3 +45,12 @@ Alternatively:
 1. ```docker-sync start```
 2. In a new shell run after you started docker-sync 
 ```docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d```
+
+
+## FAQ
+### How to I populate the DB, once all the containers are up and running?
+- Get a recent .sql file of the full DB, and run the following from the directory where the .sql file exists.
+```docker exec -i d7hid_mariadb_1 mysql -uroot -psecret hidglobal < hidglobal.db.sql```
+### How do a I run a ```drush```command?
+-  Run a ```docker exec``` which points at the ```d7hid_php-fpm_1``` container. I.e.,
+```docker exec -i d7hid_php-fpm_1 drush cc all```
