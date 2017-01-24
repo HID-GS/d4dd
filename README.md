@@ -11,6 +11,24 @@
 2. Set the path to your projects folder in .env file
 3. Configure ${PROJECT}.conf file in containers/nginx/sites folder
 4. Add records to /etc/hosts file	
+5. Example DB configuration in settings.php
+```$databases = array(
+  'default' =>
+  array(
+    'default' =>
+    array(
+      //'database' => 'hid_brand_family',
+      'database' => 'hidglobal',
+      'username' => 'hidglobal',
+      'password' => 'secret',
+      'host' => 'mariadb',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);```
+
 
 ## Run instructions(Linux)
 1. ```docker-compose build```
