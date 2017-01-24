@@ -51,6 +51,6 @@ Alternatively:
 ### How to I populate the DB, once all the containers are up and running?
 - Get a recent .sql file of the full DB, and run the following from the directory where the .sql file exists.
 ```docker exec -i d7hid_mariadb_1 mysql -uroot -psecret hidglobal < hidglobal.db.sql```
-### How do a I run a ```drush```command?
+### How do a I run a ```drush``` command?
 -  Run a ```docker exec``` which points at the ```d7hid_php-fpm_1``` container. I.e.,
 ```docker exec -i d7hid_php-fpm_1 drush cc all```
