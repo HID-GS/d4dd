@@ -12,7 +12,7 @@
 3. Configure ${PROJECT}.conf file in containers/nginx/sites folder
 4. Add records to /etc/hosts file	
 5. Example DB configuration in settings.php
-:::php
+
 ```
 $databases = array(
   'default' =>
