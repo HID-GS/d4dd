@@ -54,3 +54,26 @@ Alternatively:
 ### How do a I run a ```drush``` command?
 -  Run a ```docker exec``` which points at the ```d7hid_php-fpm_1``` container. I.e.,
 ```docker exec -i d7hid_php-fpm_1 drush cc all```
+
+
+## Notes re: securing iptables in Linux
+### Start Docker without iptables
+- create ```/lib/systemd/system/docker.service.d/noiptables.conf``` and fill it with the followinginfo:
+```
+[Service]
+ExecStart=
+ExecStart=/usr/bin/docker daemon  --iptables=false
+```
+### Modify the ufw rules
+- In /etc/ufw/user.rules, add the following rules:
+```
+*nat
+:docker_postrouting - [0:0]
+-A POSTROUTING -j docker_postrouting
+-A docker_postrouting -s 172.16.0.0/12 ! -o br+ -j MASQUERADE
+COMMIT
+
+### DOCKER STUFF ###
+-A FORWARD -i br+ -j ACCEPT
+### DOCKER END ###
+```
