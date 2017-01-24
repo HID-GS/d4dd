@@ -58,7 +58,7 @@ Alternatively:
 
 ## Notes re: securing iptables in Linux
 ### Start Docker without iptables
-- create ```/lib/systemd/system/docker.service.d/noiptables.conf``` and fill it with the followinginfo:
+- create ```/lib/systemd/system/docker.service.d/noiptables.conf``` and fill it with the following info:
 ```
 [Service]
 ExecStart=
