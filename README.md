@@ -56,6 +56,8 @@ Alternatively:
 -  Run a ```docker exec``` which points at the ```d7hid_php-fpm_1``` container. I.e.,
 ```docker exec -i d7hid_php-fpm_1 drush cc all```
 ### I'm running these containers on a Linux box, and I've heard there's [a major security flaw](http://blog.viktorpetersson.com/post/101707677489/the-dangers-of-ufw-docker) inherent to using Docker on Linux. How do I secure the IP Tables? 
+A handy guide can be found [here](https://svenv.nl/unixandlinux/dockerufw).
+
 #### Start Docker without iptables
 - create ```/lib/systemd/system/docker.service.d/noiptables.conf``` and fill it with the following info:
 ```
@@ -64,7 +66,7 @@ ExecStart=
 ExecStart=/usr/bin/docker daemon  --iptables=false
 ```
 #### Modify the ufw rules
-- In /etc/ufw/user.rules, add the following rules:
+- In /etc/ufw/user.before, add the following rules above *filter:
 ```
 *nat
 :docker_postrouting - [0:0]
@@ -72,6 +74,7 @@ ExecStart=/usr/bin/docker daemon  --iptables=false
 -A docker_postrouting -s 172.16.0.0/12 ! -o br+ -j MASQUERADE
 COMMIT
 
+- In the same file, add the following before "COMMIT" at the bottom.
 ### DOCKER STUFF ###
 -A FORWARD -i br+ -j ACCEPT
 ### DOCKER END ###
