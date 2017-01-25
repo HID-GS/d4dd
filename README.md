@@ -47,6 +47,7 @@ Alternatively:
 ```docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d```
 
 
+
 ## FAQ
 ### How to I populate the DB, once all the containers are up and running?
 - Get a recent .sql file of the full DB, and run the following from the directory where the .sql file exists.
