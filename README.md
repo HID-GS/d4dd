@@ -77,6 +77,10 @@ COMMIT
 - In the same file, add the following before "COMMIT" at the bottom.
 ### DOCKER STUFF ###
 -A FORWARD -i br+ -j ACCEPT
+
+# for xdebug #
+-A ufw-before-input -p tcp --dport 9000 -s 172.18.0.0/12 -j ACCEPT
+
 ### DOCKER END ###
 ```
 ### I tried to run ```docker-compose up -d``` and I got a strange error: ```No available IPv4 addresses on this network's address pools```. What gives?
