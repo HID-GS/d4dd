@@ -73,8 +73,9 @@ ExecStart=/usr/bin/docker daemon  --iptables=false
 -A POSTROUTING -j docker_postrouting
 -A docker_postrouting -s 172.16.0.0/12 ! -o br+ -j MASQUERADE
 COMMIT
-
+```
 - In the same file, add the following before "COMMIT" at the bottom.
+```
 ### DOCKER STUFF ###
 -A FORWARD -i br+ -j ACCEPT
 
