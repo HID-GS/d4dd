@@ -24,7 +24,8 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
 
 # ADD for REMOTE debugging
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "xdebug.remote_host=$HOST_IP" >> /usr/local/etc/php/conf.d/xdebug.ini
+# inserting new line, just in case .ini file doesn't end with a new line
+RUN echo -e "\nxdebug.remote_host=$HOST_IP" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
