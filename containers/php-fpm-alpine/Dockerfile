@@ -40,9 +40,10 @@ RUN { \
 
 # set develop PHP.ini settings
 RUN { \
-		echo 'error_log = /var/log/php_errors.log'; \
-		echo 'log_errors = 1'; \
-		echo 'error_reporting = E_ALL'; \
+		echo 'error_log=/var/log/php_errors.log'; \
+		echo 'log_errors=1'; \
+		echo 'error_reporting=E_ALL'; \
+		echo 'auto_detect_line_endings=1'; \
 	} > /usr/local/etc/php/conf.d/develop-settings.ini
 
 # Drush:
