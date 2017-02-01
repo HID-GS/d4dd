@@ -3,7 +3,8 @@ FROM java:openjdk-7-alpine
 # Install Apache Solr
 ENV SOLR_VERSION 3.6.2
 ENV SOLR apache-solr-$SOLR_VERSION
-ADD http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/$SOLR.tgz /opt/$SOLR.tgz
+RUN mkdir /opt
+RUN wget -q http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/$SOLR.tgz -O /opt/$SOLR.tgz
 RUN tar -C /opt --extract --file /opt/$SOLR.tgz
 RUN mv /opt/$SOLR /opt/solr
 
