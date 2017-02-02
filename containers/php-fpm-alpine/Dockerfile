@@ -45,6 +45,7 @@ RUN { \
 		echo 'log_errors=1'; \
 		echo 'error_reporting=E_ALL'; \
 		echo 'auto_detect_line_endings=1'; \
+		echo 'max_execution_time = 100'; \
 	} > /usr/local/etc/php/conf.d/develop-settings.ini
 
 # Drush:
@@ -60,8 +61,9 @@ RUN if [ $(grep www-data /etc/passwd | wc -l) -eq 0 ]; then \
 
 # Delete packages
 RUN apk del libtool autoconf gcc g++ make && \
-  rm -rf /etc/ssl /tmp/* /var/cache/apk/*
+  rm -rf /tmp/* /var/cache/apk/*
 
+RUN mkdir -p /var/www/hidglobal/hid
 WORKDIR /var/www/hidglobal/hid
 
 EXPOSE 9000
