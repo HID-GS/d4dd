@@ -12,15 +12,15 @@ services:
     build:
       context: ./containers/mariadb
     volumes:
-        - mysql:/var/lib/mysql
+        - mysql-test:/var/lib/mysql
     restart: always
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: hidglobal
-      MYSQL_USER: hidglobal
-      MYSQL_PASSWORD: secret
+#      MYSQL_DATABASE: hidglobal
+#      MYSQL_USER: hidglobal
+#      MYSQL_PASSWORD: secret
   nginx:
     build:
       context: ./containers/nginx
@@ -80,3 +80,4 @@ services:
       - "6379:6379"
 volumes:
   mysql:
+  mysql-test:
