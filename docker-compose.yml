@@ -5,7 +5,7 @@ services:
   applications:
     image: tianon/true
     volumes:
-#      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
+      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
 #      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
       - ${PROJECTS_PATH}/${HID_D7}:/var/www/hidglobal
   mariadb:
