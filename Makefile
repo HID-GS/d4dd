@@ -50,4 +50,4 @@ stop:
 	@echo ""
 status:
 ## Statuses for existing container farm
-	@./docker-status.bash
+	@lib/docker-status.bash
