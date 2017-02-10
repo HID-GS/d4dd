@@ -45,7 +45,7 @@ RUN { \
 		echo 'log_errors=1'; \
 		echo 'error_reporting=E_ALL'; \
 		echo 'auto_detect_line_endings=1'; \
-		echo 'max_execution_time = 100'; \
+		echo 'max_execution_time = 300'; \
 	} > /usr/local/etc/php/conf.d/develop-settings.ini
 
 # Drush:
@@ -58,6 +58,24 @@ RUN if [ $(grep www-data /etc/passwd | wc -l) -eq 0 ]; then \
         addgroup -g 82 -S www-data; \
         adduser -u 82 -D -S -G www-data www-data; \
     fi;
+
+# Composer
+ARG INSTALL_COMPOSER=false
+RUN if [ ${INSTALL_COMPOSER} = true ]; then \
+		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+		&& php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
+		&& php composer-setup.php \
+		&& php -r "unlink('composer-setup.php');" \
+		&& mv composer.phar /usr/local/bin/composer \
+;fi
+
+#Drupal console
+ARG INSTALL_DRUPAL_CLI=false
+RUN if [ ${INSTALL_DRUPAL_CLI} = true ]; then \
+		php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar \
+		&& mv drupal.phar /usr/local/bin/drupal \
+		&& chmod +x /usr/local/bin/drupal \
+;fi
 
 # Delete packages
 RUN apk del libtool autoconf gcc g++ make && \

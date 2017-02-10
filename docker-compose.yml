@@ -40,6 +40,8 @@ services:
       context: ./containers/php-fpm-alpine
       args:
         - INSTALL_XDEBUG=true
+        - INSTALL_COMPOSER=true
+        - INSTALL_DRUPAL_CLI=true
         - HOST_IP=${HOST_IP}
     depends_on:
       - mariadb
