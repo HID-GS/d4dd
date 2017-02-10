@@ -11,10 +11,6 @@ site_name: 'example'
 # this will be mapped to
 site_root_local: '~/Sites/example'
 
-# optionally, name the file system sync via rsync by uncommenting the
-# line below:
-# site_root_type: 'rsync'
-
 # optionally define additional language URLs with the languages setting
 # below. each entry in the list will be appended to the main site url.
 # e.g.: en.<site_name>.dev, de.<site_name>.dev, etc...
