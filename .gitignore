@@ -6,6 +6,6 @@ data/*
 data
 sites.d/*yml
 docker-sync.yml
-lib/docker-composer-volumes.yml
+lib/docker-compose-volumes.yml
 *.bak
 
