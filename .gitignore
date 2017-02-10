@@ -4,5 +4,6 @@
 .DS_Store
 data/*
 data
+sites.d/*yml
 docker-sync.yml
 
