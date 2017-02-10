@@ -4,6 +4,9 @@ help:
 	@echo "Available commands:"
 	@sed -ne 's/^\([^#][^ ]*:\)/ \1/gp'  -ne 's/^##/  --/gp' < Makefile
 	@echo ""
+prepare:
+## Prepares stack to run configuration
+	@lib/prepare.bash
 docker-rebuild:
 ## Rebuilds docker container farm
 	docker-compose stop
