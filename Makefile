@@ -18,7 +18,7 @@ docker-restart:
 	docker-compose up -d
 db-download:
 ## Downloads new database file from dev2
-	sh getdb.sh
+	sh lib/getdb.sh
 db-import:
 ## Imports new db into container 
 	@echo "Deploying new database"
