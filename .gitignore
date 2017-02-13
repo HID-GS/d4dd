@@ -8,4 +8,6 @@ sites.d/*yml
 docker-sync.yml
 lib/docker-compose-volumes.yml
 *.bak
+containers/nginx/sites/*confs
+*~
 
