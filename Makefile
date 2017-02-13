@@ -7,6 +7,8 @@ help:
 prepare:
 ## Prepares stack to run configuration
 	@lib/prepare_volumes.bash
+	@lib/prepare_nginx.bash
+	@lib/prepare_containers.bash
 docker-rebuild:
 ## Rebuilds docker container farm
 	docker-compose stop
