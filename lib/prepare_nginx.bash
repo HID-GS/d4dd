@@ -12,5 +12,4 @@ for site in sites.d/*.yml; do
   cat $config_file | \
     sed  -e 's/%%site_name%%/'"$site_name"'/g' \
          -e 's/%%site_aliases%%/'"$site_aliases"'/g' > "$nginx_folder/$site_name.conf"
-  echo "done."
 done
