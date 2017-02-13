@@ -6,7 +6,7 @@ help:
 	@echo ""
 prepare:
 ## Prepares stack to run configuration
-	@lib/prepare.bash
+	@lib/prepare_volumes.bash
 docker-rebuild:
 ## Rebuilds docker container farm
 	docker-compose stop

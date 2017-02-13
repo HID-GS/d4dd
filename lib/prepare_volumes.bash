@@ -19,7 +19,7 @@ echo "version: '2'"     > $TEMP_FILE;
 echo 'services:'       >> $TEMP_FILE;
 echo '  volumes-only:' >> $TEMP_FILE;
 echo '    volumes:'    >> $TEMP_FILE;
-gawk -f lib/prepare.awk sites.d/*yml | sed "s/'//g" >> $TEMP_FILE
+gawk -f lib/prepare_volumes.awk sites.d/*yml | sed "s/'//g" >> $TEMP_FILE
 
 echo "Done."
 echo ""
