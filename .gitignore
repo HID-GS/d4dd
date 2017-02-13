@@ -10,4 +10,5 @@ lib/docker-compose-volumes.yml
 *.bak
 containers/nginx/sites/*confs
 *~
+*.swp
 
