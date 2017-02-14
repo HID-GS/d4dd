@@ -1,2 +1,0 @@
-CREATE DATABASE hidglobal_d8;
-CREATE DATABASE hidglobal_d7;
