@@ -30,6 +30,7 @@ services:
         - "443:443"
     volumes:
         - ./data/logs/nginx/:/var/log/nginx
+        - ./data/config/sites:/etc/nginx/sites-available
     volumes_from:
         - php-fpm
     links:
