@@ -84,6 +84,7 @@ services:
     build: ./containers/utility
     volumes:
       - ./data/config/utility:/utility
+      - ~/.ssh/id_ed25519.pub:/root/.ssh/authorized_keys
     volumes_from:
       - applications
     depends_on:
@@ -94,5 +95,7 @@ services:
     environment:
       mariadb_USERNAME: root
       mariadb_ROOT_PASSWORD: secret
+    ports:
+      - "2222:22"
 volumes:
   mysql:

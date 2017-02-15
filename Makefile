@@ -6,6 +6,7 @@ help:
 	@echo ""
 prepare:
 ## Prepares stack to run configuration
+	@lib/prepare_keys.bash
 	@lib/prepare_volumes.bash
 	@lib/prepare_nginx.bash
 	@lib/prepare_containers.bash

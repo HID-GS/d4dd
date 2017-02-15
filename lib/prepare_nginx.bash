@@ -20,7 +20,6 @@ for site in sites.d/*.yml; do
     sed  -e 's/%%site_name%%/'"$site_name"'/g' \
          -e 's/%%site_aliases%%/'"$site_aliases"'/g' > "$nginx_folder/$site_name.conf"
   echo "CREATE DATABASE IF NOT EXISTS $site_name;" >> $utility_file
-  echo "CREATE DATABASE IF NOT EXISTS $site_name;" >> $utility_file
   echo "GRANT ALL ON $site_name.* to docker@localhost identified by 'docker';" >> $utility_file
   echo "GRANT ALL ON $site_name.* to docker@\`%\` identified by 'docker';" >> $utility_file
 done
