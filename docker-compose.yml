@@ -82,6 +82,8 @@ services:
       - "6379:6379"
   utility:
     build: ./containers/utility
+    volumes:
+      - ./data/config/utility:/utility
     volumes_from:
       - applications
     depends_on:

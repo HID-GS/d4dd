@@ -6,4 +6,5 @@ RUN { \
   apk add mariadb-client; \
 }
 
-CMD ["top"]
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
