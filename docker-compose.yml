@@ -5,7 +5,7 @@ services:
   applications:
     image: tianon/true
     extends:
-      file: lib/docker-compose-volumes.yml
+      file: data/config/docker-compose-volumes.yml
       service: volumes-only
   mariadb:
     build:

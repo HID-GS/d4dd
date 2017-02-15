@@ -5,7 +5,8 @@
 # Setup docker-compose-volumes.yml file
 echo ""
 echo "Setting up volumes..."
-TEMP_FILE="lib/docker-compose-volumes.yml";
+mkdir -p data/config
+TEMP_FILE="data/config/docker-compose-volumes.yml";
 echo "version: '2'"     > $TEMP_FILE;
 echo 'services:'       >> $TEMP_FILE;
 echo '  volumes-only:' >> $TEMP_FILE;
