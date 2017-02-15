@@ -79,5 +79,17 @@ services:
       - ./data/redis:/data
     ports:
       - "6379:6379"
+  utility:
+    build: ./containers/utility
+    volumes_from:
+      - applications
+    depends_on:
+      - applications
+      - mariadb
+    links:
+      - mariadb:db
+    environment:
+      mariadb_USERNAME: root
+      mariadb_ROOT_PASSWORD: secret
 volumes:
   mysql:
