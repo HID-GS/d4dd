@@ -9,5 +9,5 @@ $0 ~ /^site_root_local/ || $0 ~ /^site_name/ {
   }
 }
 END {
-    print "      - " ENVIRON["PWD"] "/sites.d:/docker_sites";
+    print "      - " ENVIRON["PWD"] ":/docker_config";
 }
