@@ -7,10 +7,11 @@ echo ""
 echo "Setting up volumes..."
 mkdir -p data/config
 TEMP_FILE="data/config/docker-compose-volumes.yml";
-echo "version: '2'"     > $TEMP_FILE;
-echo 'services:'       >> $TEMP_FILE;
-echo '  volumes-only:' >> $TEMP_FILE;
-echo '    volumes:'    >> $TEMP_FILE;
+echo "version: '2'"              > $TEMP_FILE;
+echo 'services:'                >> $TEMP_FILE;
+echo '  volumes-only:'          >> $TEMP_FILE;
+echo '    volumes:'             >> $TEMP_FILE;
+echo '      - ./..:/docker_config' >> $TEMP_FILE;
 gawk -f lib/scripts/prepare_volumes.awk sites.d/*yml | sed "s/'//g" >> $TEMP_FILE
 
 echo "Done."
