@@ -8,15 +8,15 @@ rm -rf data/config/sites/*conf 2> /dev/null
 mkdir -p data/config/utility 2> /dev/null
 rm -rf data/config/utility/* 2> /dev/null
 
-config_file='lib/nginx_template.conf'
+config_file='lib/templates/nginx_template.conf'
 nginx_folder='data/config/sites'
 utility_folder='data/config/utility'
 utility_file="$utility_folder/init.sql"
 for site in sites.d/*.yml; do
   echo "Processing nginx config for $site"
-  site_name="$(gawk -f lib/prepare_nginx_name.awk $site)"
-  site_aliases="$(gawk -f lib/prepare_nginx_aliases.awk $site)"
-  database="$(gawk -f lib/prepare_db_file.awk $site | sed 's#~#'$HOME'#g')"
+  site_name="$(gawk -f lib/scripts/prepare_nginx_name.awk $site)"
+  site_aliases="$(gawk -f lib/scripts/prepare_nginx_aliases.awk $site)"
+  database="$(gawk -f lib/scripts/prepare_db_file.awk $site | sed 's#~#'$HOME'#g')"
   if [[ -f $database ]] && [[ ! $database == data/* ]]; then
     cp $database data/$site_name.sql
   fi

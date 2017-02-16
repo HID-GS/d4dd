@@ -6,10 +6,10 @@ help:
 	@echo ""
 prepare:
 ## Prepares stack to run configuration
-	@lib/prepare_keys.bash
-	@lib/prepare_volumes.bash
-	@lib/prepare_nginx.bash
-	@lib/prepare_containers.bash
+	@lib/scripts/prepare_keys.bash
+	@lib/scripts/prepare_volumes.bash
+	@lib/scripts/prepare_nginx.bash
+	@lib/scripts/prepare_containers.bash
 docker-rebuild:
 ## Rebuilds docker container farm
 	docker-compose stop
@@ -21,7 +21,7 @@ docker-restart:
 	docker-compose up -d
 db-download:
 ## Downloads new database file from dev2
-	sh lib/getdb.sh
+	sh lib/scripts/getdb.sh
 db-import:
 ## Imports new db into container 
 	@echo "Deploying new database"
@@ -53,4 +53,4 @@ stop:
 	@echo ""
 status:
 ## Statuses for existing container farm
-	@lib/docker-status.bash
+	@lib/scripts/docker-status.bash

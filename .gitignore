@@ -6,11 +6,7 @@ data/*
 data
 sites.d/*yml
 docker-sync.yml
-lib/docker-compose-volumes.yml
 *.bak
-containers/nginx/sites/*conf
 *~
 *.swp
-!containers/mariadb/docker-entrypoint-initdb.d/README
-containers/mariadb/docker-entrypoint-initdb.d
 

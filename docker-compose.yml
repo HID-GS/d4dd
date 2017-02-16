@@ -9,7 +9,7 @@ services:
       service: volumes-only
   mariadb:
     build:
-      context: ./containers/mariadb
+      context: ./lib/services/mariadb
     volumes:
         - mysql:/var/lib/mysql
     restart: always
@@ -22,7 +22,7 @@ services:
 #      MYSQL_PASSWORD: secret
   nginx:
     build:
-      context: ./containers/nginx
+      context: ./lib/services/nginx
       args:
           - PHP_UPSTREAM=php-fpm
     ports:
@@ -37,7 +37,7 @@ services:
         - php-fpm
   php-fpm:
     build:
-      context: ./containers/php-fpm-alpine
+      context: ./lib/services/php-fpm-alpine
       args:
         - INSTALL_XDEBUG=true
         - INSTALL_COMPOSER=true
@@ -64,12 +64,12 @@ services:
       mariadb_USERNAME: root
       mariadb_ROOT_PASSWORD: secret
   solr3:
-    build: ./containers/solr-3.x
+    build: ./lib/services/solr-3.x
     ports:
       - 8983:8983
     restart: always
   grunt:
-    build: ./containers/grunt-alpine
+    build: ./lib/services/grunt-alpine
     volumes_from:
       - applications
     depends_on:
@@ -81,7 +81,7 @@ services:
     ports:
       - "6379:6379"
   utility:
-    build: ./containers/utility
+    build: ./lib/services/utility
     volumes:
       - ./data/config/utility:/utility
       - ~/.ssh/id_ed25519.pub:/root/.ssh/authorized_keys
