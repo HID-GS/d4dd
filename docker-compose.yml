@@ -17,9 +17,6 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: secret
-#      MYSQL_DATABASE: hidglobal
-#      MYSQL_USER: hidglobal
-#      MYSQL_PASSWORD: secret
   nginx:
     build:
       context: ./lib/services/nginx
