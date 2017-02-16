@@ -11,6 +11,6 @@ lib/docker-compose-volumes.yml
 containers/nginx/sites/*conf
 *~
 *.swp
-containers/mariadb/docker-entrypoint-initdb.d/
 !containers/mariadb/docker-entrypoint-initdb.d/README
+containers/mariadb/docker-entrypoint-initdb.d
 
