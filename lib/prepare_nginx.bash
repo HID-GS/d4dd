@@ -16,6 +16,10 @@ for site in sites.d/*.yml; do
   echo "Processing nginx config for $site"
   site_name="$(gawk -f lib/prepare_nginx_name.awk $site)"
   site_aliases="$(gawk -f lib/prepare_nginx_aliases.awk $site)"
+  database="$(gawk -f lib/prepare_db_file.awk $site | sed 's#~#'$HOME'#g')"
+  if [[ -f $database ]] && [[ ! $database == data/* ]]; then
+    cp $database data/$site_name.sql
+  fi
   cat $config_file | \
     sed  -e 's/%%site_name%%/'"$site_name"'/g' \
          -e 's/%%site_aliases%%/'"$site_aliases"'/g' > "$nginx_folder/$site_name.conf"

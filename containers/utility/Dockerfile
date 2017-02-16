@@ -12,8 +12,4 @@ RUN { \
 
 COPY ./docker-entrypoint.sh /
 
-RUN { \
-  chmod 700 /root/.ssh; \
-}
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
