@@ -40,7 +40,7 @@
 
 
    D8:
-```
+   ```
    $databases['default']['default'] = array (
        'database' => 'default',
        'username' => 'user',
@@ -51,7 +51,7 @@
        'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
        'driver' => 'mysql',
    );
-```
+   ```
 
 
 ## Run instructions(Linux)
@@ -59,7 +59,7 @@
 2. ```docker-compose up -d```
 
 ## Run instructions(Mac)
-1. ```docker-sync-stack start```
+1. ```docker-sync-stack start6```
 
 Alternatively:
 
