@@ -59,7 +59,7 @@
 2. ```docker-compose up -d```
 
 ## Run instructions(Mac)
-1. ```docker-sync-stack start6```
+1. ```docker-sync-stack start```
 
 Alternatively:
 
