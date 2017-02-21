@@ -12,12 +12,19 @@
   * i.e., if your Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```/var/www/hid```
 3. In the same ```.env``` file, set ```HID_D7``` and ```DRUPAL_8``` to the folders where the site exists.
   * i.e., if your D7 Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```old_site```
-4. In the same ```.env``` file, modify ```HOST_IP``` to match (...what? local IP? 0.0.0.0?) 
-5. Open your ```hosts``` file
-6. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
- 1. Find the ```server_name``` entry
+4. (IF ADDING NEW SITE) In the same ```.env``` file, add additional paths as needed.
+  * i.e., if your D7 Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```old_site```
+5. In the same ```.env``` file, modify ```HOST_IP``` to match an external IP
+  * Leverage Peter's handy dandy script in order to find a likely IP:
+    ```HOST_IP=$(ifconfig | awk '$0 ~ /inet / && $0 !~ /127.0.0.1/ {print $2; exit;}');```
+6. Open your ```hosts``` file
+7. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
+  1. Find the ```server_name``` entry
   2. In your ```hosts``` file, add an entry mapping the ```HOST_IP``` to the ```server_name```
-7. Add the following DB configuration in settings.php
+
+8. (IF ADDING NEW SITE) In the containers/mariadb/docker-entrypoint-initdb.d/init.sql, add ```CREATE DATABASE``` lines as needed.
+9. (IF ADDING NEW SITE) In /containers/nginx/sites, create ```.conf``` files mimicking the structure of what is currently committed in the repo.
+10. Add the following DB configuration in settings.php
 
    D7:
    ```
