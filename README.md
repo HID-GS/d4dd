@@ -9,17 +9,20 @@
 
 1. ```cp .env.default .env```
 2. Set the path to your projects folder in .env file
-3. Configure ${PROJECT}.conf file in containers/nginx/sites folder
-4. Add records to /etc/hosts file	
-5. Example DB configuration in settings.php
+3. Modify ```HOST_IP``` to match (...what? local IP? 0.0.0.0?) 
+3. Open your ```hosts``` file
+4. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
+a. Find the ```server_name``` entry
+b. Add an entry mapping the ```HOST_IP``` to the ```server_name```
+5. Add the following DB configuration in settings.php
 
+D7:
 ```
 $databases = array(
   'default' =>
   array(
     'default' =>
     array(
-      //'database' => 'hid_brand_family',
       'database' => 'hidglobal',
       'username' => 'hidglobal',
       'password' => 'secret',
@@ -29,6 +32,21 @@ $databases = array(
       'prefix' => '',
     ),
   ),
+);
+```
+
+
+D8:
+```
+$databases['default']['default'] = array (
+    'database' => 'default',
+    'username' => 'user',
+    'password' => 'password',
+    'prefix' => '',
+    'host' => 'mariadb',
+    'port' => '3306',
+    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+    'driver' => 'mysql',
 );
 ```
 
