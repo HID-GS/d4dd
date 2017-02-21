@@ -34,7 +34,7 @@
        'default' =>
        array(
          'database' => 'hidglobal_d7',
-         'username' => 'hidglobal',
+         'username' => 'root',
          'password' => 'secret',
          'host' => 'mariadb',
          'port' => '3306',
@@ -50,8 +50,8 @@
    ```
    $databases['default']['default'] = array (
        'database' => 'hidglobal_d8',
-       'username' => 'user',
-       'password' => 'password',
+       'username' => 'root',
+       'password' => 'secret',
        'prefix' => '',
        'host' => 'mariadb',
        'port' => '3306',
