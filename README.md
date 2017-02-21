@@ -13,41 +13,41 @@
 3. Open your ```hosts``` file
 4. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
   1. Find the ```server_name``` entry
-  2. Add an entry mapping the ```HOST_IP``` to the ```server_name```
+  2. In your ```hosts``` file, add an entry mapping the ```HOST_IP``` to the ```server_name```
 5. Add the following DB configuration in settings.php
 
    D7:
-```
-$databases = array(
-  'default' =>
-  array(
-    'default' =>
-    array(
-      'database' => 'hidglobal',
-      'username' => 'hidglobal',
-      'password' => 'secret',
-      'host' => 'mariadb',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);
-```
+   ```
+   $databases = array(
+     'default' =>
+      array(
+       'default' =>
+       array(
+         'database' => 'hidglobal',
+         'username' => 'hidglobal',
+         'password' => 'secret',
+         'host' => 'mariadb',
+         'port' => '3306',
+         'driver' => 'mysql',
+         'prefix' => '',
+       ),
+     ),
+   );
+   ```
 
 
 D8:
 ```
-$databases['default']['default'] = array (
-    'database' => 'default',
-    'username' => 'user',
-    'password' => 'password',
-    'prefix' => '',
-    'host' => 'mariadb',
-    'port' => '3306',
-    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-    'driver' => 'mysql',
-);
+   $databases['default']['default'] = array (
+       'database' => 'default',
+       'username' => 'user',
+       'password' => 'password',
+       'prefix' => '',
+       'host' => 'mariadb',
+       'port' => '3306',
+       'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+       'driver' => 'mysql',
+   );
 ```
 
 
