@@ -52,9 +52,11 @@ Alternatively:
 ### How to I populate the DB, once all the containers are up and running?
 - Get a recent .sql file of the full DB, and run the following from the directory where the .sql file exists.
 ```docker exec -i d7hid_mariadb_1 mysql -uroot -psecret hidglobal < hidglobal.db.sql```
+
 ### How do a I run a ```drush``` command?
 -  Run a ```docker exec``` which points at the ```d7hid_php-fpm_1``` container. I.e.,
 ```docker exec -i d7hid_php-fpm_1 drush cc all```
+
 ### I'm running these containers on a Linux box, and I've heard there's [a major security flaw](http://blog.viktorpetersson.com/post/101707677489/the-dangers-of-ufw-docker) inherent to using Docker on Linux. How do I secure the IP Tables? 
 A handy guide can be found [here](https://svenv.nl/unixandlinux/dockerufw).
 
