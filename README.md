@@ -7,14 +7,17 @@
 
 ## Configuration
 
-1. ```cp .env.default .env```
-2. Set the path to your projects folder in .env file
-3. Modify ```HOST_IP``` to match (...what? local IP? 0.0.0.0?) 
-3. Open your ```hosts``` file
-4. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
-  1. Find the ```server_name``` entry
+1. After cloning this repo, at the project's root, make a local copy of the .env file: ```cp .env.default .env```
+2. In the newly-created ```.env``` file, set ```PROJECTS_PATH``` to the root folder where your Drupal sites exist
+  * i.e., if your Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```/var/www/hid```
+3. In the same ```.env``` file, set ```HID_D7``` and ```DRUPAL_8``` to the folders where the site exists.
+  * i.e., if your D7 Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```old_site```
+4. In the same ```.env``` file, modify ```HOST_IP``` to match (...what? local IP? 0.0.0.0?) 
+5. Open your ```hosts``` file
+6. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
+ 1. Find the ```server_name``` entry
   2. In your ```hosts``` file, add an entry mapping the ```HOST_IP``` to the ```server_name```
-5. Add the following DB configuration in settings.php
+7. Add the following DB configuration in settings.php
 
    D7:
    ```
