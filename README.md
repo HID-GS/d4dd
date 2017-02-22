@@ -24,40 +24,30 @@
 
 8. (IF ADDING NEW SITE) In the containers/mariadb/docker-entrypoint-initdb.d/init.sql, add ```CREATE DATABASE``` lines as needed.
 9. (IF ADDING NEW SITE) In /containers/nginx/sites, create ```.conf``` files mimicking the structure of what is currently committed in the repo.
-10. Add the following DB configuration in settings.php
+10. For each instance, create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
+11. Access the Drupal install screen. When you get to the database information form,fill out the following:
+
 
    D7:
    ```
-   $databases = array(
-     'default' =>
-      array(
-       'default' =>
-       array(
-         'database' => 'hidglobal_d7',
-         'username' => 'root',
-         'password' => 'secret',
-         'host' => 'mariadb',
-         'port' => '3306',
-         'driver' => 'mysql',
-         'prefix' => '',
-       ),
-     ),
-   );
+         database => hidglobal_d7
+         username => root
+         password => secret
+         host => mariadb
+         port => 3306
+         driver => mysql
+
    ```
 
 
    D8:
    ```
-   $databases['default']['default'] = array (
-       'database' => 'hidglobal_d8',
-       'username' => 'root',
-       'password' => 'secret',
-       'prefix' => '',
-       'host' => 'mariadb',
-       'port' => '3306',
-       'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-       'driver' => 'mysql',
-   );
+       database => hidglobal_d8
+       username => root
+       password => secret
+       host => mariadb
+       port => 3306
+       driver => mysql
    ```
 
 
