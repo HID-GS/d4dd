@@ -22,10 +22,10 @@ db-import:
 	@if [ `which pv` ]; then pv data/backups/HIDGlobal.mysql | mysql -h 0.0.0.0 -u root -psecret hidglobal_d7 2> /dev/null; else mysql -h 0.0.0.0 -u root -psecret hidglobal_d7 < data/backups/HIDGlobal.mysql 2> /dev/null; fi
 db-configure:
 ## Configures new db into container 
-	docker-compose exec php-fpm drush updb -y
-	docker-compose exec php-fpm drush en -y language_domains stage_file_proxy maillog views_ui update
-	docker-compose exec php-fpm drush dis -y memcache memcache_admin redis
-	docker-compose exec php-fpm drush vset error_level 2
+	docker-compose exec php-fpm sh -c 'drush updb -y; \
+		drush en -y language_domains stage_file_proxy maillog views_ui; \
+		drush dis -y redis; \
+		drush vset error_level 2'
 #docker-drush:
 #	docker-compose run drush $(filter-out $@,$(MAKECMDGOALS))
 docker-drush:
