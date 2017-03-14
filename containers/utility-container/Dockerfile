@@ -107,6 +107,23 @@ RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="/var/www/vendor/bin:$PATH"' >> ~/.bashrc
 
 #####################################
+# User Aliases
+#####################################
+
+USER hiddock
+COPY ./aliases.sh /home/hiddock/aliases.sh
+RUN echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source /home/hiddock/aliases.sh" >> ~/.bashrc && \
+    echo "" >> ~/.bashrc
+
+USER root
+RUN echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source /home/hiddock/aliases.sh" >> ~/.bashrc && \
+    echo "" >> ~/.bashrc
+
+#####################################
 # xDebug:
 #####################################
 
@@ -117,8 +134,14 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     # Load the xdebug extension only with phpunit commands
     apt-get update && \
     apt-get install -y --force-yes php7.0-xdebug && \
-    sed -i 's/^/;/g' /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
-    echo "alias phpunit='php -dzend_extension=xdebug.so /var/www/vendor/bin/phpunit'" >> ~/.bashrc \
+    sed -i 's/^/;/g' /etc/php/7.0/cli/conf.d/20-xdebug.ini \
 ;fi
 # ADD for REMOTE debugging
 COPY ./xdebug.ini /etc/php/7.0/cli/conf.d/xdebug.ini
+
+#####################################
+# mariadb client:
+#####################################
+
+USER root
+RUN apt-get install -y mariadb-client
