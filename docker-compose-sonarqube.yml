@@ -72,6 +72,21 @@ services:
       - "50000:50000"
     links:
       - sonarqube
+      - utility-container
+  mariadb:
+    build:
+      context: ./containers/mariadb
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306
+      - 22
+    networks:
+      - sonarnet
+    links:
+      - utility-container
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
 volumes:
   postgresql:
   postgresql_data:
@@ -80,6 +95,7 @@ volumes:
   sonarqube_extensions:
   sonarqube_bundled-plugins:
   jenkins_home:
+  mysql:
 networks:
   sonarnet:
     driver: bridge

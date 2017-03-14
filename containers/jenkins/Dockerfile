@@ -1,7 +1,7 @@
 FROM jenkins:alpine
 LABEL vendor="HID Global"
 
-RUN install-plugins.sh sonar ssh ssh-agent cloudbees-folder timestamper workflow-aggregator subversion ldap antisamy-markup-formatter ws-cleanup github-organization-folder ssh-slaves email-ext build-timeout ant pipeline-stage-view matrix-auth mailer credentials-binding gradle git pam-auth
+RUN install-plugins.sh sonar ssh cloudbees-folder timestamper workflow-aggregator subversion ldap antisamy-markup-formatter ws-cleanup github-organization-folder ssh-slaves email-ext build-timeout ant pipeline-stage-view matrix-auth mailer credentials-binding gradle git pam-auth
 
 COPY jenkins.install.UpgradeWizard.state /var/jenkins_home/jenkins.install.UpgradeWizard.state
 
@@ -18,3 +18,8 @@ RUN rm -f /etc/service/sshd/down && \
     cat /tmp/id_rsa >> /root/.ssh/id_rsa \
       && rm -f /tmp/id_rsa* \
       && chmod 400 /root/.ssh/id_rsa
+
+RUN { \
+  echo 'Host utility-container'; \
+  echo '    StrictHostKeyChecking no'; \
+} > /root/.ssh/config
