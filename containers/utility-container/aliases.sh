@@ -29,7 +29,7 @@ alias tree="xtree"
 # PHP Alisases
 alias cdump="composer dump-autoload -o"
 alias composer:dump="composer dump-autoload -o"
-alias phpunit="php -dzend_extension=xdebug.so /var/www/drupal/vendor/bin/phpunit"
+alias phpunit="php /var/www/drupal/vendor/bin/phpunit"
 alias covtest="COVERAGE=/var/www/drupal/tests/coverage /var/www/drupal/run-tests.sh phpunit"
 
 # requires installation of 'https://www.npmjs.com/package/npms-cli'
