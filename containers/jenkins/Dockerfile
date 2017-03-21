@@ -9,6 +9,10 @@ COPY jenkins.install.InstallUtil.lastExecVersion /var/jenkins_home/jenkins.insta
 
 COPY basic-security.groovy /var/jenkins_home/init.groovy.d/basic-security.groovy
 
+RUN mkdir /var/jenkins_home/jobs/Update_Unit_Tests_SonarQube
+
+COPY ./Update_Unit_Tests_SonarQube/config.xml /var/jenkins_home/jobs/Update_Unit_Tests_SonarQube/config.xml
+
 ADD ./id_rsa_insecure /tmp/id_rsa
 
 USER root
