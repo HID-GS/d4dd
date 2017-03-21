@@ -106,3 +106,10 @@ COMMIT
 ```
 ### I tried to run ```docker-compose up -d``` and I got a strange error: ```No available IPv4 addresses on this network's address pools```. What gives?
 - It may be because you have a VPN connection open. Please disconnect from the VPN & rerun ```docker-compose up -d```.
+
+### First time running or after destroying volumes ###
+Log into sonarqube and generate auth token: /account/security/
+
+Update auth tokens in TWO places in jenkins
+/job/Update_Unit_Tests_SonarQube/configure
+/configure
