@@ -9,7 +9,7 @@ COPY jenkins.install.InstallUtil.lastExecVersion /var/jenkins_home/jenkins.insta
 
 COPY basic-security.groovy /var/jenkins_home/init.groovy.d/basic-security.groovy
 
-RUN mkdir /var/jenkins_home/jobs/Update_Unit_Tests_SonarQube
+RUN mkdir -p /var/jenkins_home/jobs/Update_Unit_Tests_SonarQube
 
 COPY ./Update_Unit_Tests_SonarQube/config.xml /var/jenkins_home/jobs/Update_Unit_Tests_SonarQube/config.xml
 
@@ -27,3 +27,6 @@ RUN { \
   echo 'Host utility-container'; \
   echo '    StrictHostKeyChecking no'; \
 } > /root/.ssh/config
+
+COPY ./hudson.plugins.sonar.SonarGlobalConfiguration.xml /var/jenkins_home/hudson.plugins.sonar.SonarGlobalConfiguration.xml
+COPY ./hudson.plugins.sonar.SonarRunnerInstallation.xml /var/jenkins_home/hudson.plugins.sonar.SonarRunnerInstallation.xml
