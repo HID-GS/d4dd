@@ -11,7 +11,7 @@ def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 hudsonRealm.createAccount('admin','admin')
 instance.setSecurityRealm(hudsonRealm)
 
-def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+def strategy = new hudson.security.FullControlOnceLoggedInAuthorizationStrategy()
 strategy.setAllowAnonymousRead(false)
 instance.setAuthorizationStrategy(strategy)
 instance.save()
