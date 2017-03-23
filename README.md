@@ -75,7 +75,7 @@ Alternatively:
 -  Run a ```docker exec``` which points at the ```d4dd_php-fpm_1``` container. I.e.,
 ```docker exec -i d4dd_php-fpm_1 drush cc all```
 
-### How do a I access the CLI of an instance?
+### How do I access the CLI on an instance?
 -  Run 
 ```docker exec -i -t INSTANCE_NAME /bin/sh```  ..where INSTANCE_NAME is replaced by the instance name (ie, d4dd_php-fpm_1)
 
