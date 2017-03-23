@@ -25,7 +25,11 @@
 8. (IF ADDING NEW SITE) In the containers/mariadb/docker-entrypoint-initdb.d/init.sql, add ```CREATE DATABASE``` lines as needed.
 9. (IF ADDING NEW SITE) In /containers/nginx/sites, create ```.conf``` files mimicking the structure of what is currently committed in the repo.
 10. For each instance, create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
-11. Access the Drupal install screen. When you get to the database information form, enter the following:
+11. Add the following line at the bottom of settings.php:
+
+```$config_directories['sync'] = 'sites/default/config/base';```
+
+14. Access the Drupal install screen. When you get to the database information form, enter the following:
 
 
    D7:
