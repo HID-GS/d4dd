@@ -5,7 +5,7 @@
       <name>Jenkins Sonarqube</name>
       <serverUrl>http://sonarqube:9000</serverUrl>
       <serverVersion>5.3</serverVersion>
-      <serverAuthenticationToken>ef0b01a8ee82696b43aff287698306745f9b5cdd</serverAuthenticationToken>
+      <serverAuthenticationToken>ReplacedOnStartup</serverAuthenticationToken>
       <mojoVersion></mojoVersion>
       <databaseUrl></databaseUrl>
       <databaseLogin></databaseLogin>

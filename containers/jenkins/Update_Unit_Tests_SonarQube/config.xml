@@ -17,7 +17,7 @@ ssh root@utility-container &quot;cd /var/www/drupal; composer install; cd web; d
     </hudson.tasks.Shell>
     <hudson.plugins.sonar.SonarRunnerBuilder plugin="sonar@2.6">
       <project></project>
-      <properties>sonar.login=f35c48e5e3666959a58b71afa77d221e4fc08d9c
+      <properties>sonar.login=ReplacedOnStartup
 sonar.projectBaseDir=/var/www/drupal</properties>
       <javaOpts></javaOpts>
       <additionalArguments></additionalArguments>

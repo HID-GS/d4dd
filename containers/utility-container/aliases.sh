@@ -25,6 +25,7 @@ alias ra="reload"
 alias reload="source ~/.aliases && echo \"$COL_GREEN ==> Aliases Reloaded... $COL_RESET \n \""
 alias run="npm run"
 alias tree="xtree"
+alias ll="ls -al"
 
 # PHP Alisases
 alias cdump="composer dump-autoload -o"

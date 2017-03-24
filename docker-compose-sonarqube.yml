@@ -28,7 +28,8 @@ services:
       - sonarnet
     tty: true
   sonarqube:
-    image: sonarqube:alpine
+    build:
+      context: ./containers/sonarqube
     depends_on:
       - postgres
     ports:

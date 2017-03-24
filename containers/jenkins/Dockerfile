@@ -30,3 +30,9 @@ RUN { \
 
 COPY ./hudson.plugins.sonar.SonarGlobalConfiguration.xml /var/jenkins_home/hudson.plugins.sonar.SonarGlobalConfiguration.xml
 COPY ./hudson.plugins.sonar.SonarRunnerInstallation.xml /var/jenkins_home/hudson.plugins.sonar.SonarRunnerInstallation.xml
+
+COPY ./tokenReplace /bin/tokenReplace
+
+RUN chmod +x /bin/tokenReplace
+
+ENTRYPOINT ["/bin/tokenReplace"]
