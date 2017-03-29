@@ -76,8 +76,13 @@ Alternatively:
 ```docker exec -i d4dd_mariadb_1 mysql -uroot -psecret hidglobal < hidglobal.db.sql```
 
 ### How do a I run a ```drush``` command?
--  Run a ```docker exec``` which points at the ```d4dd_php-fpm_1``` container. I.e.,
-```docker exec -i d4dd_php-fpm_1 drush cc all```
+- Access the shell of the ```php-fpm``` container.
+```docker exec -i -t INSTANCE_NAME /bin/sh```  ..where INSTANCE_NAME is replaced by the php-fpm instance name (ie, d4dd_php-fpm_1)
+- Move to the desired instance's Drupal root directory.
+D7: ```cd /var/www/hidglobal.hid```
+D8: ```cd /var/www/drupal```
+- Run the desired drush command.
+```drush YOUR_COMMAND_HERE```
 
 ### How do I access the CLI on an instance?
 -  Run 
