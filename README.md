@@ -83,7 +83,7 @@ docker exec -i -t INSTANCE_NAME /bin/sh
 ...where INSTANCE_NAME is replaced by the php-fpm instance name (ie, d4dd_php-fpm_1)
 - Move to the desired instance's Drupal root directory.
 
-D7: ```cd /var/www/hidglobal.hid```
+D7: ```cd /var/www/hidglobal/hid```
 
 D8: ```cd /var/www/drupal```
 
