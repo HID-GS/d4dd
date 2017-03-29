@@ -85,7 +85,7 @@ docker exec -i -t INSTANCE_NAME /bin/sh
 
 D7: ```cd /var/www/hidglobal/hid```
 
-D8: ```cd /var/www/drupal```
+D8: ```cd /var/www/drupal/web```
 
 - Run the desired drush command.
 
