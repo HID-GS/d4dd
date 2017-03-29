@@ -1,5 +1,5 @@
 FROM jenkins:alpine
-LABEL vendor="HID Global"
+MAINTAINER Nic Laflin <nic@nlighteneddevelopment.com>
 
 RUN install-plugins.sh sonar ssh cloudbees-folder timestamper workflow-aggregator subversion ldap antisamy-markup-formatter ws-cleanup github-organization-folder ssh-slaves email-ext build-timeout ant pipeline-stage-view matrix-auth mailer credentials-binding gradle git pam-auth
 

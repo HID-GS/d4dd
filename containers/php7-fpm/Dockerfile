@@ -34,7 +34,7 @@ RUN php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > 
 
 RUN usermod -u 1000 www-data
 
-WORKDIR /var/www/hidglobal/hid
+WORKDIR /var/www/drupal/${DOCROOT}
 
 CMD ["php-fpm"]
 

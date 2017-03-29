@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /var/www/hidglobal/hid/sites/all/themes/hidglobal
+cd /var/www/drupal/${DOCROOT}/${THEME}
 npm update
 bower install
 bundle install

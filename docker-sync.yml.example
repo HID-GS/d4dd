@@ -33,10 +33,10 @@ syncs:
 
     # which folder to watch / sync from - you can use tilde (~), it will get expanded. Be aware that the trailing slash makes a difference
     # if you add them, only the inner parts of the folder gets synced, otherwise the parent folder will be synced as top-level folder
-    src: '~/Sites/hidglobal/hid/'
+    src: '~/Sites/web/'
 
     # which destination on the sync-container. Since you will use volumes_from to mount this, this should match your code-deployment location in the real container
-    dest: '/var/www/hidglobal/hid'
+    dest: '/var/www/drupal/web'
 
     # when a port of a container is exposed, on which IP does it get exposed. Localhost for docker for mac, something else for docker-machine
     sync_host_ip: '127.0.0.1'

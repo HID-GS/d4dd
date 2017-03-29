@@ -53,11 +53,11 @@ RUN apk del curl python linux-headers paxctl gnupg ${DEL_PKGS} && \
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 RUN mkdir /src
-RUN mkdir -p /var/www/hidglobal
+RUN mkdir -p /var/www/drupal
 
 COPY ./install.sh /src
 
 RUN chmod +x /src/install.sh
 
-WORKDIR /var/www/hidglobal
+WORKDIR /var/www/drupal
 ENTRYPOINT ["/src/install.sh"]

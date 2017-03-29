@@ -15,9 +15,9 @@ RUN n 0.10.48
 RUN npm install -g phantomjs-prebuilt
 
 RUN mkdir /src
-RUN mkdir -p /var/www/theme
+RUN mkdir -p /var/www/drupal/${THEME}
 COPY ./install.sh /src
 RUN chmod +x /src/install.sh
 
-WORKDIR /var/www/theme
+WORKDIR /var/www/drupal/${THEME}
 ENTRYPOINT ["/src/install.sh"]

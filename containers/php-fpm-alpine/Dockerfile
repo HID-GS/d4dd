@@ -81,8 +81,8 @@ RUN if [ ${INSTALL_DRUPAL_CLI} = true ]; then \
 RUN apk del libtool autoconf gcc g++ make && \
   rm -rf /tmp/* /var/cache/apk/*
 
-RUN mkdir -p /var/www/hidglobal/hid
-WORKDIR /var/www/hidglobal/hid
+RUN mkdir -p /var/www/drupal/${DOCROOT}
+WORKDIR /var/www/drupal/${DOCROOT}
 
 EXPOSE 9000
 

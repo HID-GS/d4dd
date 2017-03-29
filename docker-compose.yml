@@ -5,9 +5,7 @@ services:
   applications:
     image: tianon/true
     volumes:
-      - ${PROJECTS_PATH}/${DRUPAL_8}:/var/www/drupal
-#      - ${PROJECTS_PATH}/${SYMFONY_2}:/var/www/symfony
-      - ${PROJECTS_PATH}/${HID_D7}:/var/www/hidglobal
+      - ${APPLICATION}:/var/www/drupal
   mariadb:
     build:
       context: ./containers/mariadb
@@ -15,20 +13,17 @@ services:
         - mysql:/var/lib/mysql
     restart: always
     ports:
-      - 3306:3306
+      - ${MARIADB_PORT}:3306
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-#      MYSQL_DATABASE: hidglobal
-#      MYSQL_USER: hidglobal
-#      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: ${MARIADB_PASSWORD}
   nginx:
     build:
       context: ./containers/nginx
       args:
           - PHP_UPSTREAM=php-fpm
     ports:
-        - "80:80"
-        - "443:443"
+        - "${NGINX_HOST_HTTP_PORT}:80"
+        - "${NGINX_HOST_HTTPS_PORT}:443"
     volumes:
         - ./data/logs/nginx/:/var/log/nginx
     volumes_from:
@@ -59,14 +54,14 @@ services:
     links:
       - mariadb:db
     ports:
-      - 8181:80
+      - ${PMA_PORT}:80
     environment:
-      mariadb_USERNAME: root
-      mariadb_ROOT_PASSWORD: secret
+      mariadb_USERNAME: ${MARIADB_USERNAME}
+      mariadb_ROOT_PASSWORD: ${MARIADB_PASSWORD}
   solr3:
     build: ./containers/solr-3.x
     ports:
-      - 8983:8983
+      - ${SOLR_HOST_PORT}:8983
     restart: always
   grunt:
     build: ./containers/grunt-alpine
@@ -79,6 +74,6 @@ services:
     volumes:
       - ./data/redis:/data
     ports:
-      - "6379:6379"
+      - "${REDIS_HOST_PORT}:6379"
 volumes:
   mysql:

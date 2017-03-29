@@ -1,4 +1,5 @@
 FROM laradock/workspace:1.3
+MAINTAINER Nic Laflin <nic@nlighteneddevelopment.com>
 
 #
 #--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ FROM laradock/workspace:1.3
 # Add a non-root user to prevent files being created with root permissions on host machine.
 ARG PUID=1000
 ARG PGID=1000
-RUN groupadd -g 1000 hiddock && useradd -u 1000 -g hiddock -m hiddock
+RUN groupadd -g 1000 drupaldock && useradd -u 1000 -g drupaldock -m drupaldock
 
 #####################################
 # Set Timezone
@@ -45,11 +46,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #####################################
 
 # Add the composer.json
-COPY ./composer.json /home/hiddock/.composer/composer.json
+COPY ./composer.json /home/drupaldock/.composer/composer.json
 
-# Make sure that ~/.composer belongs to hiddock
-RUN chown -R hiddock:hiddock /home/hiddock/.composer
-USER hiddock
+# Make sure that ~/.composer belongs to drupaldock
+RUN chown -R drupaldock:drupaldock /home/drupaldock/.composer
+USER drupaldock
 
 # Check if global install need to be ran
 ARG COMPOSER_GLOBAL_INSTALL=false
@@ -94,14 +95,14 @@ RUN if [ ${INSTALL_DRUSH} = true ]; then \
     drush core-status \
 ;fi
 
-USER hiddock
+USER drupaldock
 
 #####################################
 # Non-root user : PHPUnit path
 #####################################
 
 # add ./vendor/bin to non-root user's bashrc (needed for phpunit)
-USER hiddock
+USER drupaldock
 
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="/var/www/vendor/bin:$PATH"' >> ~/.bashrc
@@ -110,17 +111,17 @@ RUN echo "" >> ~/.bashrc && \
 # User Aliases
 #####################################
 
-USER hiddock
-COPY ./aliases.sh /home/hiddock/aliases.sh
+USER drupaldock
+COPY ./aliases.sh /home/drupaldock/aliases.sh
 RUN echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
-    echo "source /home/hiddock/aliases.sh" >> ~/.bashrc && \
+    echo "source /home/drupaldock/aliases.sh" >> ~/.bashrc && \
     echo "" >> ~/.bashrc
 
 USER root
 RUN echo "" >> ~/.bashrc && \
     echo "# Load Custom Aliases" >> ~/.bashrc && \
-    echo "source /home/hiddock/aliases.sh" >> ~/.bashrc && \
+    echo "source /home/drupaldock/aliases.sh" >> ~/.bashrc && \
     echo "" >> ~/.bashrc
 
 #####################################

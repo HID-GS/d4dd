@@ -1,2 +1,1 @@
-CREATE DATABASE hidglobal_d8;
-CREATE DATABASE hidglobal_d7;
+CREATE DATABASE project_db;
