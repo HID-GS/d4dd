@@ -11,7 +11,6 @@ services:
       context: ./containers/mariadb
     volumes:
         - mysql:/var/lib/mysql
-    restart: always
     ports:
       - ${MARIADB_PORT}:3306
     environment:
@@ -46,7 +45,6 @@ services:
       - mariadb
     ports:
       - "9000"
-    restart: always
     volumes_from:
       - applications
   phpmyadmin:
@@ -62,7 +60,6 @@ services:
     build: ./containers/solr-3.x
     ports:
       - ${SOLR_HOST_PORT}:8983
-    restart: always
   grunt:
     build: ./containers/grunt-alpine
     volumes_from:
