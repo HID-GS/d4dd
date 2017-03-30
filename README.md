@@ -1,3 +1,6 @@
+Created to be cloned within a subdirectory in your Drupal codebase. 
+Will need to enter the cloned source directory in your Drupal branch's .gitignore.
+
 # php-local-docker-environment
 
 ## Preconfiguration for MacOS
