@@ -72,5 +72,86 @@ services:
       - ./data/redis:/data
     ports:
       - "${REDIS_HOST_PORT}:6379"
+
+##### DEVELOPMENT CONTAINERS
+  utility-container:
+    build:
+      context: ./containers/utility-container
+      args:
+        - INSTALL_XDEBUG=true
+        - INSTALL_DRUSH=true
+        - COMPOSER_GLOBAL_INSTALL=true
+        - INSTALL_WORKSPACE_SSH=true
+        - PUID=1000
+        - PGID=1000
+        - TZ=UTC
+    volumes_from:
+      - applications
+    ports:
+      - "22"
+    networks:
+      - sonarnet
+    links:
+      - mariadb
+    tty: true
+  sonarqube:
+    build:
+      context: ./containers/sonarqube
+    depends_on:
+      - postgres
+    ports:
+      - "${SONARQUBE_HOST_PORT}:9000"
+      - "${SONARQUBE_HOST_DATABASE_PORT}:9092"
+    networks:
+      - sonarnet
+    environment:
+      - SONARQUBE_JDBC_USERNAME=${SONARQUBE_JDBC_USERNAME}
+      - SONARQUBE_JDBC_PASSWORD=${SONARQUBE_JDBC_PASSWORD}
+      - SONARQUBE_JDBC_URL=${SONARQUBE_JDBC_URL}
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+    volumes_from:
+      - applications
+  postgres:
+    image: postgres:alpine
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgresql:/var/lib/postgresql
+        # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+      - postgresql_data:/var/lib/postgresql/data
+  jenkins:
+    build:
+      context: ./containers/jenkins
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    volumes_from:
+      - applications
+    networks:
+      - sonarnet
+    ports:
+      - "${JENKINS_HOST_PORT}:8080"
+      - "${JENKINS_HOST_API_PORT}:50000"
+    links:
+      - sonarqube
+      - utility-container
 volumes:
   mysql:
+  ##### DEVELOPMENT VOLUMES
+  postgresql:
+  postgresql_data:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  jenkins_home:
+#### DEVELOPMENT NETWORK
+networks:
+  sonarnet:
+    driver: bridge
