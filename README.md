@@ -11,45 +11,24 @@ Will need to enter the cloned source directory in your Drupal branch's .gitignor
 ## Configuration
 
 1. After cloning this repo, at the project's root, make a local copy of the .env file: ```cp .env.default .env```
-2. In the newly-created ```.env``` file, set ```PROJECTS_PATH``` to the root folder where your Drupal sites exist
-  * i.e., if your Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```/var/www/hid```
-3. In the same ```.env``` file, set ```HID_D7``` and ```DRUPAL_8``` to the folders where the site exists.
-  * i.e., if your D7 Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```old_site```
-4. (IF ADDING NEW SITE) In the same ```.env``` file, add additional paths as needed.
-  * i.e., if your D7 Drupal site exists at ```/var/www/hid/old_site```. set the variable to ```old_site```
+2. In the newly-created ```.env``` file, set ```DOCROOT``` to the root folder where your Drupal site exists
+  * i.e. if your site is in ```project/web``` set the variable to ```web```
+3. In the same ```.env``` file, set ```THEME``` to the folders where the site theme exists.
+  * i.e., if your site theme exists at ```project/web/themes/custom_theme```. set the variable to ```themes/custom_theme```
+4. For all other variables set ports to not conflict with existing used ports on your host machine
 5. In the same ```.env``` file, modify ```HOST_IP``` to match an external IP
   * Leverage Peter's handy dandy script in order to find a likely IP:
     ```HOST_IP=$(ifconfig | awk '$0 ~ /inet / && $0 !~ /127.0.0.1/ {print $2; exit;}');```
 6. Open your ```hosts``` file
-7. For each ```${PROJECT}.conf``` file in containers/nginx/sites folder...
-  1. Find the ```server_name``` entry
-  2. In your ```hosts``` file, add an entry mapping the ```HOST_IP``` to the ```server_name```
-
-8. (IF ADDING NEW SITE) In the containers/mariadb/docker-entrypoint-initdb.d/init.sql, add ```CREATE DATABASE``` lines as needed.
-9. (IF ADDING NEW SITE) In /containers/nginx/sites, create ```.conf``` files mimicking the structure of what is currently committed in the repo.
-10. For each instance, create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
-11. Add the following line at the bottom of settings.php:
+7. For each instance, create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
+8. Add the following line at the bottom of settings.php:
 
 ```$config_directories['sync'] = 'sites/default/config/base';```
 
-14. Access the Drupal install screen. When you get to the database information form, enter the following:
-
-
-   D7:
-   ```
-         database => hidglobal_d7
-         username => root
-         password => secret
-         host => mariadb
-         port => 3306
-         driver => mysql
+9. Access the Drupal install screen. When you get to the database information form, enter the following:
 
    ```
-
-
-   D8:
-   ```
-       database => hidglobal_d8
+       database => project_db
        username => root
        password => secret
        host => mariadb
@@ -61,6 +40,12 @@ Will need to enter the cloned source directory in your Drupal branch's .gitignor
 ## Run instructions(Linux)
 1. ```docker-compose build```
 2. ```docker-compose up -d```
+
+### How to use
+Access site at ```http://localhost:NGINX_HOST_HTTP_PORT```
+Access jenkins at ```http://localhost:JENKINS_HOST_PORT```
+Access sonarqube at ```http://localhost:SONARQUBE_HOST_PORT```
+Access phpmyadmin at ```127.0.0.1:PMA_PORT```
 
 ## Run instructions(Mac)
 1. ```docker-sync-stack start```
@@ -76,7 +61,7 @@ Alternatively:
 ## FAQ
 ### How to I populate the DB, once all the containers are up and running?
 - Get a recent .sql file of the full DB, and run the following from the directory where the .sql file exists.
-```docker exec -i d4dd_mariadb_1 mysql -uroot -psecret hidglobal < hidglobal.db.sql```
+```docker exec -i d4dd_mariadb_1 mysql -uroot -psecret project_db < your.db.sql```
 
 ### How do a I run a ```drush``` command?
 - Access the shell of the ```php-fpm``` container.
@@ -86,9 +71,7 @@ docker exec -i -t INSTANCE_NAME /bin/sh
 ...where INSTANCE_NAME is replaced by the php-fpm instance name (ie, d4dd_php-fpm_1)
 - Move to the desired instance's Drupal root directory.
 
-D7: ```cd /var/www/hidglobal/hid```
-
-D8: ```cd /var/www/drupal/web```
+Default: ```cd /var/www/drupal/web```
 
 - Run the desired drush command.
 
