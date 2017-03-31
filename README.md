@@ -16,16 +16,12 @@ Will need to enter the cloned source directory in your Drupal branch's .gitignor
 3. In the same ```.env``` file, set ```THEME``` to the folders where the site theme exists.
   * i.e., if your site theme exists at ```project/web/themes/custom_theme```. set the variable to ```themes/custom_theme```
 4. For all other variables set ports to not conflict with existing used ports on your host machine
-5. In the same ```.env``` file, modify ```HOST_IP``` to match an external IP
-  * Leverage Peter's handy dandy script in order to find a likely IP:
-    ```HOST_IP=$(ifconfig | awk '$0 ~ /inet / && $0 !~ /127.0.0.1/ {print $2; exit;}');```
-6. Open your ```hosts``` file
-7. For each instance, create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
-8. Add the following line at the bottom of settings.php:
+5. Create a new settings.php file based off of default.settings.php, and set the file's permissions to 777.
+6. Add the following line at the bottom of settings.php:
 
 ```$config_directories['sync'] = 'sites/default/config/base';```
 
-9. Access the Drupal install screen. When you get to the database information form, enter the following:
+7. Access the Drupal install screen. When you get to the database information form, enter the following:
 
    ```
        database => project_db
@@ -35,11 +31,20 @@ Will need to enter the cloned source directory in your Drupal branch's .gitignor
        port => 3306
        driver => mysql
    ```
-
+#### If not on Linux you may need to do the following
+1. In the ```.env``` file, modify ```HOST_IP``` to match an external IP
+  * Leverage Peter's handy dandy script in order to find a likely IP:
+    ```HOST_IP=$(ifconfig | awk '$0 ~ /inet / && $0 !~ /127.0.0.1/ {print $2; exit;}');```
+2. Open your ```hosts``` file
 
 ## Run instructions(Linux)
 1. ```docker-compose build```
 2. ```docker-compose up -d```
+
+To stop containers
+* ```docker-compose down```
+To stop containers and delete container data (will not delete the project files but will delete db and other information)
+* ```docker-compose down -v```
 
 ### How to use
 Access site at ```http://localhost:NGINX_HOST_HTTP_PORT```
@@ -112,10 +117,3 @@ COMMIT
 ```
 ### I tried to run ```docker-compose up -d``` and I got a strange error: ```No available IPv4 addresses on this network's address pools```. What gives?
 - It may be because you have a VPN connection open. Please disconnect from the VPN & rerun ```docker-compose up -d```.
-
-### First time running or after destroying volumes ###
-Log into sonarqube and generate auth token: /account/security/
-
-Update auth tokens in TWO places in jenkins
-/job/Update_Unit_Tests_SonarQube/configure
-/configure
