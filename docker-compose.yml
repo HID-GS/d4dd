@@ -13,6 +13,8 @@ services:
         - mysql:/var/lib/mysql
     ports:
       - ${MARIADB_PORT}:3306
+    networks:
+        - sonarnet
     environment:
       MYSQL_ROOT_PASSWORD: ${MARIADB_PASSWORD}
   nginx:
@@ -27,8 +29,8 @@ services:
         - ./data/logs/nginx/:/var/log/nginx
     volumes_from:
         - php-fpm
-    links:
-        - php-fpm
+    networks:
+        - sonarnet
   php-fpm:
     build:
       context: ./containers/php-fpm-alpine
@@ -41,8 +43,8 @@ services:
       - mariadb
     volumes:
       - ./data/logs/php/:/var/log
-    links:
-      - mariadb
+    networks:
+        - sonarnet
     ports:
       - "9000"
     volumes_from:
@@ -85,14 +87,13 @@ services:
         - PUID=1000
         - PGID=1000
         - TZ=UTC
+        - DEFAULT_TEST_CONFIG=${DEFAULT_TEST_CONFIG}
     volumes_from:
       - applications
     ports:
       - "22"
     networks:
       - sonarnet
-    links:
-      - mariadb
     tty: true
   sonarqube:
     build:

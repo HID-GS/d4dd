@@ -146,3 +146,23 @@ COPY ./xdebug.ini /etc/php/7.0/cli/conf.d/xdebug.ini
 
 USER root
 RUN apt-get install -y mariadb-client
+
+#####################################
+# test structure:
+#####################################
+ARG DEFAULT_TEST_CONFIG=false
+
+RUN mkdir -p /var/www/tests
+COPY ./tests /var/www/tests
+
+RUN if [ ${DEFAULT_TEST_CONFIG} = true ]; then \
+#Use Default Config
+    mkdir /var/www/tests/config && \
+    cp -a /var/www/tests/sample_config/. /var/www/tests/config \
+;fi
+
+COPY ./entrypoint.bash /bin/entrypoint.bash
+
+RUN chmod +x /bin/entrypoint.bash
+
+ENTRYPOINT ["/bin/entrypoint.bash"]

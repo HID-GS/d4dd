@@ -31,7 +31,7 @@ alias ll="ls -al"
 alias cdump="composer dump-autoload -o"
 alias composer:dump="composer dump-autoload -o"
 alias phpunit="php /var/www/drupal/vendor/bin/phpunit"
-alias covtest="COVERAGE=/var/www/drupal/tests/coverage /var/www/drupal/run-tests.sh phpunit"
+alias covtest="/var/www/drupal/tests/config/run-tests.sh"
 
 # requires installation of 'https://www.npmjs.com/package/npms-cli'
 alias npms="npms search"

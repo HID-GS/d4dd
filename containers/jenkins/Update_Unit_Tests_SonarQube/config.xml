@@ -16,7 +16,7 @@
 ssh root@utility-container &quot;cd /var/www/drupal; composer install; cd web; drush updb -y; source ~/.bashrc; cd /var/www/drupal; bash -ic covtest&quot;; exit;</command>
     </hudson.tasks.Shell>
     <hudson.plugins.sonar.SonarRunnerBuilder plugin="sonar@2.6">
-      <project></project>
+        <project>/var/www/drupal/tests/config/sonar-project.properties</project>
       <properties>sonar.login=ReplacedOnStartup
 sonar.projectBaseDir=/var/www/drupal</properties>
       <javaOpts></javaOpts>

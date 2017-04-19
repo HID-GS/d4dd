@@ -1,6 +1,10 @@
 Created to be cloned within a subdirectory in your Drupal codebase. 
 Will need to enter the cloned source directory in your Drupal branch's .gitignore.
 
+This project requires phpcov which requires a newer version of phpunit than Drupal currently ships with.
+```composer remove "phpunit/phpunit"```
+```composer require --dev "phpunit/phpunit": "^5.1" "phpunit/phpcov": "^3.1"```
+
 # php-local-docker-environment
 
 ## Preconfiguration for MacOS
