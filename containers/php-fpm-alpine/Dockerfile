@@ -46,6 +46,8 @@ RUN { \
 		echo 'error_reporting=E_ALL'; \
 		echo 'auto_detect_line_endings=1'; \
 		echo 'max_execution_time = 300'; \
+		echo 'upload_max_filesize = 50M'; \
+		echo 'post_max_size = 50M'; \
 	} > /usr/local/etc/php/conf.d/develop-settings.ini
 
 # Drush:
