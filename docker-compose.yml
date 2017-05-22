@@ -22,13 +22,7 @@ services:
         - ./data/logs/nginx/:/var/log/nginx
         - ./code:/var/www/html
   php:
-    build:
-      context: ./containers/php-fpm-alpine
-      args:
-        - INSTALL_XDEBUG=true
-        - INSTALL_COMPOSER=true
-        - INSTALL_DRUPAL_CLI=true
-        - HOST_IP=${HOST_IP}
+    image: dlaion/drupal-php
     depends_on:
       - mariadb
     volumes:
@@ -57,14 +51,15 @@ services:
 #      - ./data/redis:/data
 #    ports:
 #      - "${REDIS_HOST_PORT}:6379"
-  traefik:
-    image: traefik
-    command: -c /dev/null --web --docker --logLevel=INFO
-    ports:
-      - '8000:80'
-#      - '8080:8080' # Dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+
+#  traefik:
+#    image: traefik
+#    command: -c /dev/null --web --docker --logLevel=INFO
+#    ports:
+#      - '8000:80'
+##      - '8080:8080' # Dashboard
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
 ##### DEVELOPMENT CONTAINERS
   utility-container:
     build:
