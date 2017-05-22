@@ -1,5 +1,4 @@
 FROM nginx:alpine
-MAINTAINER Dmitry Larionov <dlarionov@burningbuttons.com>
 
 ADD nginx.conf /etc/nginx/
 COPY sites/*.conf /etc/nginx/sites-available/

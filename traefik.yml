@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  traefik:
+    image: traefik
+    restart: unless-stopped
+    command: -c /dev/null --web --docker --logLevel=DEBUG
+    networks:
+      - project1
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  project1:
+    external: 
+      name: d8test_default
+
+
