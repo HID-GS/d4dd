@@ -26,6 +26,8 @@
             <exclude>/var/www/drupal/vendor</exclude>
             <!-- Exclude Drush tests. -->
             <exclude>/var/www/drupal/drush/tests</exclude>
+            <!--Exclude Drupal Core tests. -->
+            <exclude>/var/www/drupal/web/core</exclude>
         </testsuite>
     </testsuites>
     <listeners>
